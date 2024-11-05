@@ -1,10 +1,13 @@
+import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
 
 export default function Home() {
   return (
-    <div className="h-screen w-full bg-white/80 px-3 pt-4 flex">
+    <div className="h-screen w-full bg-white/80 px-3 pt-1 flex">
       <Sidebar />
-      <div className="w-full h-[40%]"></div>
+      <main className="w-full h-full">
+        <Navbar />
+      </main>
     </div>
   );
 }
