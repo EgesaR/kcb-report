@@ -1,7 +1,8 @@
-import { Link } from "@nextui-org/react";
+import {  Link } from "@nextui-org/react";
 import Form from "./form";
 
-const SignInPage = () => {
+const SignUpPage = () => {
+  
   return (
     <div className="h-screen w-full bg-black flex flex-row items-center justify-center text-white relative">
       <div className="z-40 w-full flex flex-col items-center">
@@ -11,7 +12,7 @@ const SignInPage = () => {
         <Form />
         <div className="flex w-[30%]">
           <Link href="#" underline="always" className="ml-auto text-white mt-6">
-            Create Account
+            Login
           </Link>
         </div>
       </div>
@@ -20,4 +21,4 @@ const SignInPage = () => {
   );
 };
 
-export default SignInPage;
+export default SignUpPage;
