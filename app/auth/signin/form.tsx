@@ -5,9 +5,11 @@ import EyeFilledIcon from "@/components/icons/EyeFilledIcon";
 import EyeSlashFilledIcon from "@/components/icons/EyeSlashFilledIcon";
 import { FormEvent, useState } from "react";
 import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 const Form = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const router = useRouter();
 
   const toggleVisibility = () => setIsVisible(!isVisible);
 
@@ -15,11 +17,17 @@ const Form = () => {
     event.preventDefault();
 
     const formData = new FormData(event.currentTarget);
-      signIn('credentials', {
-          username: formData.get("username"),
-          password: formData.get("password"),
-          redirect: false
-    })
+    const response = await signIn("credentials", {
+      username: formData.get("username"),
+      password: formData.get("password"),
+      redirect: false,
+    });
+
+    console.log({ response });
+    if (!response?.error) {
+      router.push("/dashboard")
+      router.refresh()
+    }
   };
 
   return (

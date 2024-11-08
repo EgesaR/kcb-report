@@ -25,13 +25,16 @@ const Sidebar = () => {
         minimize ? "w-[4%]" : "w-[24%]"
       } relative border-r-1 border-slate-400 pr-3 overflow-hidden`}
     >
-      <div className="flex items-center">
+      <div
+        className={`flex items-center ${minimize ? "flex-col" : "flex-row"}`}
+      >
         <h1 className="font-bold text-[10px] sm:text-lg">
           {minimize ? "KCB" : "Kiira College Butiki"}
         </h1>
         <button onClick={() => handleMinimize()}>
           <IoIosArrowDropleft
-            className="ml-auto hover:bg-green-300 text-green-900 rounded-full w-8 h-8 p-1"
+            className={`ml-auto hover:bg-green-300 text-green-900 rounded-full w-8 h-8 p-1 
+            ${minimize ? "rotate-45" : "rotate-45"}`}
             fontSize={20}
           />
         </button>
@@ -67,11 +70,14 @@ const Sidebar = () => {
               src="https://i.pravatar.cc/150?u=a042581f4e29026024d"
               size="sm"
             />
-            {minimize ? "" : <div className="text-[12px] text-left">
-              <div>Ochepa Elisha</div>
-              <div>ochepaelisga@gmail.com</div>
-            </div>}
-            
+            {minimize ? (
+              ""
+            ) : (
+              <div className="text-[12px] text-left">
+                <div>Ochepa Elisha</div>
+                <div>ochepaelisga@gmail.com</div>
+              </div>
+            )}
           </button>
         </div>
       </div>

@@ -1,8 +1,14 @@
-import {  Link } from "@nextui-org/react";
+import { Link } from "@nextui-org/react";
 import Form from "./form";
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
 
-const SignUpPage = () => {
-  
+const SignUpPage = async () => {
+  const session = await getServerSession();
+
+  if (session) {
+    redirect("/");
+  }
   return (
     <div className="h-screen w-full bg-black flex flex-row items-center justify-center text-white relative">
       <div className="z-40 w-full flex flex-col items-center">
@@ -11,7 +17,11 @@ const SignUpPage = () => {
         </label>
         <Form />
         <div className="flex w-[30%]">
-          <Link href="#" underline="always" className="ml-auto text-white mt-6">
+          <Link
+            href="/auth/signin"
+            underline="always"
+            className="ml-auto text-white mt-6"
+          >
             Login
           </Link>
         </div>

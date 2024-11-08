@@ -19,6 +19,7 @@ const Form = () => {
         body: JSON.stringify({
           username: formData.get("username"),
           password: formData.get("password"),
+          email: formData.get("email")
         }),
       });
 
@@ -30,9 +31,17 @@ const Form = () => {
         <Input
           type="text"
           variant={"bordered"}
-          label="Email or Username"
+          label="Username"
           className="w-full placeholder-white"
           name="username"
+          isRequired
+        />
+        <Input
+          type="email"
+          variant={"bordered"}
+          label="Email"
+          className="w-full placeholder-white"
+          name="email"
           isRequired
         />
         <Input
