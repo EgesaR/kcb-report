@@ -5,10 +5,10 @@ import { sql } from "@vercel/postgres";
 
 const handler = NextAuth({
   session: {
-    strategy: "jwt"
+    strategy: "jwt",
   },
   pages: {
-    signIn: "/auth/signin"
+    signIn: "/auth/signin",
   },
   providers: [
     CredentialsProvider({
@@ -33,7 +33,7 @@ const handler = NextAuth({
           credentials?.password || "",
           user.password
         );
-        console.log(passwordCorrect)
+        console.log(passwordCorrect);
 
         if (passwordCorrect) {
           return {

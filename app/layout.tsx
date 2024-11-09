@@ -5,6 +5,9 @@ import { NextUIProvider } from "@nextui-org/react";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
 import Logout from "./logout";
+import { sql } from "@vercel/postgres";
+import User from "./dashboard/userInfo";
+
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,12 +27,13 @@ export default async function RootLayout({
       <body
         className={`${inter.className} bg-gradient-to-r from-[#d3d3d3] to-[#d3d3d3]`}
       >
+        
         <NextUIProvider>
           <nav className="flex">
             <div className="ml-auto mr-2">
               {!!session && (
                 <div className="flex gap-4">
-                  <Link href="/dashboard">Dashboard</Link>
+                  <Link href="/dashboard">Dashboards</Link>
                   <Logout />
                 </div>
               )}
