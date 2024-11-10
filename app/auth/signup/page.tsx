@@ -26,7 +26,7 @@ const SignUpPage = async () => {
           </Link>
         </div>
       </div>
-      <div className="w-[25rem] h-[25rem] bg-green-800 rounded-full blur-[10rem] absolute"></div>
+      <div className="w-[25rem] h-[25rem] bg-green-800 rounded-full blur-[1rem] absolute"></div>
     </div>
   );
 };

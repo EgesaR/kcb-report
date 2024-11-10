@@ -13,11 +13,11 @@ export async function GET(req: NextRequest) {
       { status: 401 }
     );
   }
- const response = await sql`
-          SELECT id, username, email FROM users WHERE email=${session.user.email}
+  const response = await sql`
+          SELECT * FROM users
   `;
   // If session exists, return user data
   return NextResponse.json({
-    data: response.rows[0]
+    users: response.rows,
   });
 }

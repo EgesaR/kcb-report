@@ -30,7 +30,7 @@ const Form = () => {
       <form className="w-[30%] mt-16 flex flex-col gap-8" onSubmit={onSubmit}>
         <Input
           type="text"
-          variant={"bordered"}
+          variant={"underlined"}
           label="Username"
           className="w-full placeholder-white"
           name="username"
@@ -38,7 +38,7 @@ const Form = () => {
         />
         <Input
           type="email"
-          variant={"bordered"}
+          variant={"underlined"}
           label="Email"
           className="w-full placeholder-white"
           name="email"
@@ -46,7 +46,7 @@ const Form = () => {
         />
         <Input
           label="Password"
-          variant="bordered"
+          variant="underlined"
           className="w-full placeholder-white"
           name="password"
           isRequired

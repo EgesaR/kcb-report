@@ -6,10 +6,8 @@ import EyeSlashFilledIcon from "@/components/icons/EyeSlashFilledIcon";
 import { FormEvent, useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { ToastContainer, toast } from "react-toastify";
-
-//import "react-toastify/dist/ReactToastify.css";
-import "react-toastify/ReactToastify.css";
+import { ToastProvider } from "@/components/Toast/ToastContext";
+import ToastContainer from "@/components/Toast/ToastContainer";
 
 const Form = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -31,7 +29,6 @@ const Form = () => {
 
     if (response?.error) {
       console.log(response.error);
-      notify("Wrong Username or Password", "error");
       console.log("Truly you got an errors");
     }
     if (!response?.error) {
@@ -40,90 +37,52 @@ const Form = () => {
     }
   };
 
-  const notify = (message: any, type: string) => {
-    if (type === "success") {
-      toast.success(message, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
-    }
-    if (type === "error") {
-      toast.error(message, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
-    } else {
-      toast(message, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
-    }
-  };
-
   return (
-    <form className="w-[30%] mt-16 flex flex-col gap-8" onSubmit={onSubmit}>
-      <Input
-        type="text"
-        variant={"underlined"}
-        color={"default"}
-        label="Email or Username"
-        className="w-full placeholder-white text-white"
-        name="username"
-        isRequired
-      />
-      <Input
-        color={"default"}
-        label="Password"
-        variant="underlined"
-        className="w-full placeholder-white text-white"
-        name="password"
-        isRequired
-        endContent={
-          <button
-            className="focus:outline-none"
-            type="button"
-            onClick={toggleVisibility}
-            aria-label="toggle password visibility"
-          >
-            {isVisible ? (
-              <EyeSlashFilledIcon className="text-2xl text-default-400 pointer-events-none" />
-            ) : (
-              <EyeFilledIcon className="text-2xl text-default-400 pointer-events-none" />
-            )}
-          </button>
-        }
-        type={isVisible ? "text" : "password"}
-      />
-      <div className="flex">
-        <Link href="#" underline="always" className="ml-auto text-white">
-          Forgot Password
-        </Link>
-      </div>
-      <Button radius="lg" className="bg-green-700 w-full" type="submit">
-        Sign In
-      </Button>
-      <div>
-        <ToastContainer />
-      </div>
-    </form>
+    <ToastProvider>
+      <form className="w-[30%] mt-16 flex flex-col gap-8" onSubmit={onSubmit}>
+        <Input
+          type="text"
+          variant={"underlined"}
+          color={"default"}
+          label="Username"
+          className="w-full placeholder-white text-white"
+          name="username"
+          isRequired
+        />
+        <Input
+          color={"default"}
+          label="Password"
+          variant="underlined"
+          className="w-full placeholder-white text-white"
+          name="password"
+          isRequired
+          endContent={
+            <button
+              className="focus:outline-none"
+              type="button"
+              onClick={toggleVisibility}
+              aria-label="toggle password visibility"
+            >
+              {isVisible ? (
+                <EyeSlashFilledIcon className="text-2xl text-default-400 pointer-events-none" />
+              ) : (
+                <EyeFilledIcon className="text-2xl text-default-400 pointer-events-none" />
+              )}
+            </button>
+          }
+          type={isVisible ? "text" : "password"}
+        />
+        <div className="flex">
+          <Link href="#" underline="always" className="ml-auto text-white">
+            Forgot Password
+          </Link>
+        </div>
+        <Button radius="lg" className="bg-green-700 w-full" type="submit">
+          Sign In
+        </Button>
+      </form>
+      <ToastContainer /> {/* Ensures toasts are displayed */}
+    </ToastProvider>
   );
 };
 

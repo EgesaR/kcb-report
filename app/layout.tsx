@@ -5,9 +5,6 @@ import { NextUIProvider } from "@nextui-org/react";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
 import Logout from "./logout";
-import { sql } from "@vercel/postgres";
-import User from "./dashboard/userInfo";
-
 
 const inter = Inter({ subsets: ["latin"] });
 

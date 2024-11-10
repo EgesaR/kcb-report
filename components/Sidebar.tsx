@@ -6,27 +6,24 @@ import { GoHome } from "react-icons/go";
 import { FiUsers } from "react-icons/fi";
 import { RiSettings3Line } from "react-icons/ri";
 import { MdOutlineHeadsetMic } from "react-icons/md";
-import { Avatar } from "@nextui-org/react";
-import User from "@/app/dashboard/userInfo";
+import { Avatar, User } from "@nextui-org/react";
 
-const Sidebar = () => {
+interface UserData {
+  email: string;
+  username: string;
+  id: number;
+}
+
+const Sidebar = (data: UserData | any) => {
   const [minimize, setMinimize] = useState(false);
+  const { username, email } = data.data
+
   const handleMinimize = () => {
     console.log(minimize);
-    if (minimize === true) {
-      setMinimize(false);
-    } else {
-      setMinimize(true);
-    }
-  }
-  const user = async () => {
-    const response = await fetch("/api/getUser", {
-      method: "GET",
-      body: JSON.stringify({}),
-    });
-    return user 
-  }
-  console.log(user())
+    setMinimize(!minimize);
+  };
+  console.log("Data from sidebar", username, email)
+
   return (
     <aside
       className={`h-full ease-in-out duration-300 ${
@@ -34,12 +31,12 @@ const Sidebar = () => {
       } relative border-r-1 border-slate-400 pr-3 overflow-hidden`}
     >
       <div
-        className={`flex items-center ${minimize ? "flex-col" : "flex-row"}`}
+        className={`flex items-center ${minimize ? "flex-col" : "flex-row justify-center"}`}
       >
         <h1 className="font-bold text-[10px] sm:text-lg">
           {minimize ? "KCB" : "Kiira College Butiki"}
         </h1>
-        <button onClick={() => handleMinimize()}>
+        <button onClick={handleMinimize}>
           <IoIosArrowDropleft
             className={`ml-auto hover:bg-green-300 text-green-900 rounded-full w-8 h-8 p-1 
             ${minimize ? "rotate-180" : "rotate-0"}`}
@@ -79,7 +76,7 @@ const Sidebar = () => {
           minimize
             ? "w-[80%] ease-in-out duration-300"
             : "w-full ease-linear duration-300"
-        } flex items-center flex-col justify-center`}
+        } flex items-center flex-col justify-center pr-3`}
       >
         <button
           className={`flex ${
@@ -99,20 +96,14 @@ const Sidebar = () => {
         </button>
 
         <div className="w-full flex items-center justify-center border-t-1 border-slate-500 pt-6">
-          <button className={`flex flex-row w-[100%] gap-2 ${minimize ? "justify-center" : ""}`}>
-            <Avatar
-              src="https://i.pravatar.cc/150?u=a042581f4e29026024d"
-              size="sm"
-            />
-            {minimize ? (
-              ""
-            ) : (
-              <div className="text-[12px] text-left">
-                <div>Ochepa Elisha</div>
-                  <div>ochepaelisga@gmail.com</div>
-              </div>
-            )}
-          </button>
+          <User
+            name={minimize ? "" : username}
+            description={minimize ? "" : email}
+            avatarProps={{
+              src: "https://i.pravatar.cc/150?u=a042581f4e29026024d",
+            }}
+            className="w-full flex justify-start"
+          />
         </div>
       </div>
     </aside>

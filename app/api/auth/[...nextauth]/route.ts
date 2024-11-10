@@ -1,9 +1,9 @@
-import NextAuth from "next-auth";
+import NextAuth, { AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { compare } from "bcrypt";
 import { sql } from "@vercel/postgres";
 
-const handler = NextAuth({
+export const authOptions: AuthOptions = {
   session: {
     strategy: "jwt",
   },
@@ -12,30 +12,21 @@ const handler = NextAuth({
   },
   providers: [
     CredentialsProvider({
-      // The name to display on the sign in form (e.g. "Sign in with...")
       name: "Credentials",
-      // `credentials` is used to generate a form on the sign in page.
-      // You can specify which fields should be submitted, by adding keys to the `credentials` object.
-      // e.g. domain, username, password, 2FA token, etc.
-      // You can pass any HTML attribute to the <input> tag through the object.
       credentials: {
-        username: {},
-        password: {},
-        email: {},
+        username: { label: "Username", type: "text" },
+        password: { label: "Password", type: "password" },
       },
-      async authorize(credentials, req) {
+      async authorize(credentials) {
         const response = await sql`
           SELECT * FROM users WHERE username=${credentials?.username}
         `;
         const user = response.rows[0];
 
-        const passwordCorrect = await compare(
-          credentials?.password || "",
-          user.password
-        );
-        console.log(passwordCorrect);
-
-        if (passwordCorrect) {
+        if (
+          user &&
+          (await compare(credentials?.password || "", user.password))
+        ) {
           return {
             id: user.id,
             username: user.username,
@@ -46,6 +37,6 @@ const handler = NextAuth({
       },
     }),
   ],
-});
+};
 
-export { handler as GET, handler as POST };
+export default NextAuth(authOptions);
