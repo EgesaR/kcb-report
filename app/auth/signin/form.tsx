@@ -6,6 +6,10 @@ import EyeSlashFilledIcon from "@/components/icons/EyeSlashFilledIcon";
 import { FormEvent, useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { ToastContainer, toast } from "react-toastify";
+
+//import "react-toastify/dist/ReactToastify.css";
+import "react-toastify/ReactToastify.css";
 
 const Form = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -24,9 +28,53 @@ const Form = () => {
     });
 
     console.log({ response });
+
+    if (response?.error) {
+      console.log(response.error);
+      notify("Wrong Username or Password", "error");
+      console.log("Truly you got an errors");
+    }
     if (!response?.error) {
-      router.push("/dashboard")
-      router.refresh()
+      router.push("/dashboard");
+      router.refresh();
+    }
+  };
+
+  const notify = (message: any, type: string) => {
+    if (type === "success") {
+      toast.success(message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    }
+    if (type === "error") {
+      toast.error(message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    } else {
+      toast(message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
     }
   };
 
@@ -34,16 +82,18 @@ const Form = () => {
     <form className="w-[30%] mt-16 flex flex-col gap-8" onSubmit={onSubmit}>
       <Input
         type="text"
-        variant={"bordered"}
+        variant={"underlined"}
+        color={"default"}
         label="Email or Username"
-        className="w-full placeholder-white"
+        className="w-full placeholder-white text-white"
         name="username"
         isRequired
       />
       <Input
+        color={"default"}
         label="Password"
-        variant="bordered"
-        className="w-full placeholder-white"
+        variant="underlined"
+        className="w-full placeholder-white text-white"
         name="password"
         isRequired
         endContent={
@@ -67,9 +117,12 @@ const Form = () => {
           Forgot Password
         </Link>
       </div>
-      <Button radius="lg" className="bg-green-700" type="submit">
+      <Button radius="lg" className="bg-green-700 w-full" type="submit">
         Sign In
       </Button>
+      <div>
+        <ToastContainer />
+      </div>
     </form>
   );
 };
