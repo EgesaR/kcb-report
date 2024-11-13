@@ -44,18 +44,20 @@ const Form = () => {
           type="text"
           variant={"underlined"}
           color={"default"}
-          label="Username"
-          className="w-full placeholder-white text-white"
+          label={<label className="text-white">Username</label>}
+          className="w-full text-white placeholder-white"
           name="username"
+          labelPlacement={"outside"}
           isRequired
         />
         <Input
           color={"default"}
-          label="Password"
+          label={<label className="text-white">Password</label>}
           variant="underlined"
-          className="w-full placeholder-white text-white"
+          className="w-full"
           name="password"
           isRequired
+          labelPlacement="outside"
           endContent={
             <button
               className="focus:outline-none"

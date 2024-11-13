@@ -6,6 +6,7 @@ import Sidebar from "@/components/Sidebar";
 import { sql } from "@vercel/postgres";
 import { Skeleton } from "@nextui-org/react";
 import SkeletonLayout from "@/components/skeletonLayout";
+import Onboarding from "@/components/Onboarding";
 
 interface UserData {
   email: string;
@@ -16,6 +17,7 @@ interface UserData {
 export default function Home() {
   const [userData, setUserData] = useState<UserData | null>(null); // Type the state
   const [error, setError] = useState<string | null>(null);
+  const [showOnboarding, setShowOnboarding] = useState(false);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -43,6 +45,19 @@ export default function Home() {
     fetchUserData();
   }, []);
 
+  useEffect(() => {
+    // Check if onboarding has been shown previously
+    const isOnboardingComplete = localStorage.getItem("onboardingComplete");
+    if (!isOnboardingComplete) {
+      setShowOnboarding(true);
+    }
+  }, []);
+
+  const handleOnboardingComplete = () => {
+    setShowOnboarding(false);
+    localStorage.setItem("onboardingComplete", "true");
+  };
+
   if (error) {
     return <p>Error: {error}</p>;
   }
@@ -54,6 +69,7 @@ export default function Home() {
 
   return (
     <div className="h-screen w-full bg-white px-3 pt-1 flex">
+      {showOnboarding && <Onboarding />}
       <Sidebar data={userData} />
       <main className="w-full h-full">
         <Navbar data={userData} />
