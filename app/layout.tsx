@@ -26,7 +26,7 @@ export default async function RootLayout({
       >
         
         <NextUIProvider>
-          <nav className="flex">
+          <div className="flex">
             <div className="ml-auto mr-2">
               {!!session && (
                 <div className="flex gap-4">
@@ -36,7 +36,7 @@ export default async function RootLayout({
               )}
               {!session && <Link href="/auth/signin">Login</Link>}
             </div>
-          </nav>
+          </div>
           {children}
         </NextUIProvider>
       </body>

@@ -6,50 +6,62 @@ import { GoHome } from "react-icons/go";
 import { FiUsers } from "react-icons/fi";
 import { RiSettings3Line } from "react-icons/ri";
 import { MdOutlineHeadsetMic } from "react-icons/md";
-import { Avatar, User } from "@nextui-org/react";
+import { User } from "@nextui-org/react";
 
 interface UserData {
   email: string;
   username: string;
-  id: number;
 }
 
-const Sidebar = (data: UserData | any) => {
+interface SidebarProps {
+  handleTabChange: (tabIndex: number) => void;
+  data: UserData;
+  activeTab: number;
+}
+
+const Sidebar = ({ handleTabChange, data, activeTab }: SidebarProps) => {
   const [minimize, setMinimize] = useState(false);
-  const { username, email } = data.data
+  const { username, email } = data;
 
   const handleMinimize = () => {
-    console.log(minimize);
     setMinimize(!minimize);
   };
-  console.log("Data from sidebar", username, email)
 
   return (
-    <aside
+    <div
       className={`h-full ease-in-out duration-300 ${
         minimize ? "w-[5%]" : "w-[24%]"
       } relative border-r-1 border-slate-400 pr-3 overflow-hidden`}
     >
       <div
-        className={`flex items-center ${minimize ? "flex-col" : "flex-row justify-center"}`}
+        className={`flex items-center ${
+          minimize ? "flex-col" : "flex-row justify-center"
+        }`}
       >
         <h1 className="font-bold text-[10px] sm:text-lg">
           {minimize ? "KCB" : "Kiira College Butiki"}
         </h1>
         <button onClick={handleMinimize}>
           <IoIosArrowDropleft
-            className={`ml-auto hover:bg-green-300 text-green-900 rounded-full w-8 h-8 p-1 
-            ${minimize ? "rotate-180" : "rotate-0"}`}
+            className={`ml-auto hover:bg-green-300 text-green-900 rounded-full w-8 h-8 p-1 ${
+              minimize ? "rotate-180" : "rotate-0"
+            }`}
             fontSize={20}
           />
         </button>
       </div>
+
       <div className="mt-6">
         {minimize ? "" : <label className="text-sm text-gray-600">MAIN</label>}
         <button
           className={`flex ${
             minimize ? "justify-center transition ease" : ""
-          } gap-4 mb-2 bg-green-200 text-green-800 w-full py-2 rounded-lg px-2 items-center hover:bg-green-300 hover:text-green-900`}
+          } ${
+            activeTab === 1
+              ? "border-l-4 text-green-800 bg-green-200"
+              : "text-gray-600 hover:bg-gray-100"
+          } gap-4 mb-2  w-full py-2 rounded-lg px-2 items-center hover:bg-green-300 hover:text-green-900`}
+          onClick={() => handleTabChange(1)} // Update this to change the active tab
         >
           <GoHome fontSize={20} />
           {minimize ? "" : <label>Dashboard</label>}
@@ -57,7 +69,12 @@ const Sidebar = (data: UserData | any) => {
         <button
           className={`flex ${
             minimize ? "justify-center transition ease" : ""
+          } ${
+            activeTab === 2
+              ? "border-l-4 text-green-800 bg-green-200"
+              : "text-gray-600 hover:bg-gray-100"
           } gap-4 mb-2 text-slate-600 w-full py-2 rounded-lg px-2 items-center hover:bg-green-300 hover:text-green-900`}
+          onClick={() => handleTabChange(2)} // Update this to change the active tab
         >
           <IoMdStats fontSize={20} />
           {minimize ? "" : <label>Report</label>}
@@ -65,12 +82,18 @@ const Sidebar = (data: UserData | any) => {
         <button
           className={`flex ${
             minimize ? "justify-center transition ease" : ""
+          } ${
+            activeTab === 3
+              ? "border-l-4 text-green-800 bg-green-200"
+              : "text-gray-600 hover:bg-gray-100"
           } gap-4 mb-2 text-slate-600 w-full py-2 rounded-lg px-2 items-center hover:bg-green-300 hover:text-green-900`}
+          onClick={() => handleTabChange(3)} // Update this to change the active tab
         >
           <FiUsers fontSize={20} />
           {minimize ? "" : <label>Department</label>}
         </button>
       </div>
+
       <div
         className={`absolute bottom-5 ${
           minimize
@@ -106,7 +129,7 @@ const Sidebar = (data: UserData | any) => {
           />
         </div>
       </div>
-    </aside>
+    </div>
   );
 };
 

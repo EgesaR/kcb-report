@@ -3,7 +3,7 @@ import { Skeleton, Spinner } from "@nextui-org/react"
 const SkeletonLayout = () => {
   return (
     <div className="h-screen w-full bg-white px-3 pt-1 text-white flex">
-      <aside
+      <div
         className={`h-full ease-in-out duration-300 w-[24%] relative border-r-1 border-slate-100 pr-3 overflow-hidden`}
       >
         <Skeleton className="rounded-lg">
@@ -45,7 +45,7 @@ const SkeletonLayout = () => {
             </div>
           </div>
         </div>
-      </aside>
+      </div>
       <main className="w-full h-[90vh]">
         <div className="w-full py-2 px-3 border-b-1 border-slate-100">
           <div>
@@ -56,7 +56,7 @@ const SkeletonLayout = () => {
           <div className="flex ml-auto"></div>
         </div>
         <div className="w-full h-full bg-cyan-100/80 rounded-xl flex items-center justify-center">
- <Spinner label="Loading..." color="warning" />
+ <Spinner label="Loading..." color="success" />
         </div>
       </main>
     </div>

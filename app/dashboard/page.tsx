@@ -1,12 +1,12 @@
-"use client";
+"use client"
 
 import { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
-import { sql } from "@vercel/postgres";
-import { Skeleton } from "@nextui-org/react";
 import SkeletonLayout from "@/components/skeletonLayout";
 import Onboarding from "@/components/Onboarding";
+import { FaFileAlt, FaTasks, FaChartBar } from "react-icons/fa";
+import { BsPersonCircle } from "react-icons/bs";
 
 interface UserData {
   email: string;
@@ -15,41 +15,43 @@ interface UserData {
 }
 
 export default function Home() {
-  const [userData, setUserData] = useState<UserData | null>(null); // Type the state
+  const [userData, setUserData] = useState<UserData | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [showOnboarding, setShowOnboarding] = useState(false);
+  const [activeTab, setActiveTab] = useState(1);
+
+  // Function to change the active tab
+  const handleTabChange = (tabIndex: number) => {
+    setActiveTab(tabIndex);
+  };
 
   useEffect(() => {
     const fetchUserData = async () => {
-      console.log("loading")
       try {
         const response = await fetch("/api/getUser");
         const result = await response.json();
-        console.log("This is data",result.data);
         if (response.ok) {
           setUserData(result.data); // Set user data from the response
-          console.log("Done")
         } else {
           setError(result.error || "Unknown error");
         }
-      } catch (err: unknown) {
-        // Assert the type of err as an Error
+      } catch (err) {
         if (err instanceof Error) {
-          setError(err.message); // Access 'message' safely
+          setError(err.message);
         } else {
           setError("An unknown error occurred");
         }
       }
     };
-    console.log(userData)
     fetchUserData();
   }, []);
 
   useEffect(() => {
-    // Check if onboarding has been shown previously
-    const isOnboardingComplete = localStorage.getItem("onboardingComplete");
-    if (!isOnboardingComplete) {
-      setShowOnboarding(true);
+    if (typeof window !== "undefined") {
+      const isOnboardingComplete = localStorage.getItem("onboardingComplete");
+      if (!isOnboardingComplete) {
+        setShowOnboarding(true);
+      }
     }
   }, []);
 
@@ -63,20 +65,41 @@ export default function Home() {
   }
 
   if (!userData) {
-    return <SkeletonLayout/>;
+    return <SkeletonLayout />;
   }
-
 
   return (
     <div className="h-screen w-full bg-white px-3 pt-1 flex">
-      {showOnboarding && <Onboarding />}
-      <Sidebar data={userData} />
-      <main className="w-full h-full">
-        <Navbar data={userData} />
-        <h1>User Profile</h1>
-        <p>Email: {(userData as UserData).email}</p>
-        <p>Username: {(userData as UserData).username}</p>
-      </main>
+      {showOnboarding && <Onboarding onComplete={handleOnboardingComplete} />}
+      <Sidebar data={userData} handleTabChange={handleTabChange} activeTab={activeTab} />
+      
+
+      <div className="w-3/4 p-6">
+        {activeTab === 1 && <TabContent1 />}
+        {activeTab === 2 && <TabContent2 />}
+        {activeTab === 3 && <TabContent3 />}
+      </div>
     </div>
   );
 }
+
+const TabContent1 = () => (
+  <div className="p-4">
+    <h2 className="text-xl font-semibold">Tab 1 Content</h2>
+    <p>This is the content for Tab 1.</p>
+  </div>
+);
+
+const TabContent2 = () => (
+  <div className="p-4">
+    <h2 className="text-xl font-semibold">Tab 2 Content</h2>
+    <p>This is the content for Tab 2.</p>
+  </div>
+);
+
+const TabContent3 = () => (
+  <div className="p-4">
+    <h2 className="text-xl font-semibold">Tab 3 Content</h2>
+    <p>This is the content for Tab 3.</p>
+  </div>
+);
