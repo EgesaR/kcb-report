@@ -81,7 +81,7 @@ const Onboarding = ({onComplete}:OnboardingProps) => {
         className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md flex flex-col justify-between
                    sm:h-[60%] lg:h-[70%] animate-slide-in transition-opacity duration-500"
       >
-        <Image
+        <img
           src={onboardingSteps[stepIndex].imageUrl}
           alt={onboardingSteps[stepIndex].title}
           onError={(e) =>
@@ -89,6 +89,7 @@ const Onboarding = ({onComplete}:OnboardingProps) => {
           }
           className="w-full h-[180px] object-cover rounded-t-lg mb-4 transition-opacity duration-500 ease-in-out"
           style={{ opacity: isVisible ? 1 : 0 }}
+
         />
 
         <div className="flex-grow text-center">

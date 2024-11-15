@@ -1,12 +1,11 @@
-import NextAuth from "next-auth";
+import NextAuth, { AuthOptions, SessionStrategy } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { compare } from "bcrypt";
 import { sql } from "@vercel/postgres";
 
-// Define the authentication options
-export const authOptions = {
+export const authOptions: AuthOptions = {
   session: {
-    strategy: "jwt",
+    strategy: "jwt" as SessionStrategy, // Explicitly cast the strategy type
   },
   pages: {
     signIn: "/auth/signin",
@@ -20,14 +19,13 @@ export const authOptions = {
       },
       async authorize(credentials) {
         try {
-          // Fetch user from the database
+          // Fetch user from database
           const response = await sql`
             SELECT * FROM users WHERE username=${credentials?.username}
           `;
-
           const user = response.rows[0];
 
-          // If user exists and password is correct
+          // Validate user credentials
           if (user && (await compare(credentials?.password || "", user.password))) {
             return {
               id: user.id,
@@ -40,13 +38,13 @@ export const authOptions = {
           throw new Error("Authentication failed");
         }
 
-        return null; // Return null if no user or password doesn't match
+        return null;
       },
     }),
   ],
 };
 
-// Correctly export the NextAuth handler for the App Router
+// Use NextAuth as the handler for the route
 const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST };
