@@ -10,7 +10,7 @@ interface UserData {
 const HomeTab = (data: UserData | any) => {
     const { username } = data.data;
     return (
-      <div className="flex-1 p-6 overflow-hidden bg-gray-100">
+      <div className="w-full p-6 overflow-hidden bg-gray-100">
         {/* Welcome and User Info */}
         <div className="mb-6">
           <div className="flex items-center justify-between">
@@ -25,7 +25,7 @@ const HomeTab = (data: UserData | any) => {
             </div>
           </div>
           <p className="text-gray-500 text-sm mt-2">
-            Here's a quick overview of your recent activities.
+            Here&apos;s a quick overview of your recent activities.
           </p>
         </div>
   
@@ -84,7 +84,7 @@ const HomeTab = (data: UserData | any) => {
               <div className="flex-1">
                 <p className="text-gray-800 font-semibold">Task Completed</p>
                 <p className="text-gray-500 text-sm">
-                  Completed "Review Math Report" task on 8th November 2024
+                  Completed &quot;Review Math Report&quot; task on 8th November 2024
                 </p>
               </div>
             </div>
@@ -97,7 +97,7 @@ const HomeTab = (data: UserData | any) => {
                   Report Stats Updated
                 </p>
                 <p className="text-gray-500 text-sm">
-                  Updated stats for "Math Report" on 7th November 2024
+                  Updated stats for &quot;Math Report&quot; on 7th November 2024
                 </p>
               </div>
             </div>

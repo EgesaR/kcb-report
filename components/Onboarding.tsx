@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 interface OnboardingStep {
   title: string;
@@ -80,7 +81,7 @@ const Onboarding = ({onComplete}:OnboardingProps) => {
         className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md flex flex-col justify-between
                    sm:h-[60%] lg:h-[70%] animate-slide-in transition-opacity duration-500"
       >
-        <img
+        <Image
           src={onboardingSteps[stepIndex].imageUrl}
           alt={onboardingSteps[stepIndex].title}
           onError={(e) =>
