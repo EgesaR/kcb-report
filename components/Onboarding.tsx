@@ -7,7 +7,7 @@ interface OnboardingStep {
   imageUrl: string;
 }
 
-interface OnboardingProps{
+interface OnboardingProps {
   onComplete: () => void;
 }
 
@@ -21,8 +21,7 @@ const onboardingSteps: OnboardingStep[] = [
   {
     title: "Feature 1",
     description: "This feature allows you to do XYZ easily and quickly.",
-    imageUrl:
-      "https://mui.com/static/images/cards/contemplative-reptile.jpg",
+    imageUrl: "https://mui.com/static/images/cards/contemplative-reptile.jpg",
   },
   {
     title: "Feature 2",
@@ -38,13 +37,13 @@ const onboardingSteps: OnboardingStep[] = [
   },
 ];
 
-const Onboarding = ({onComplete}:OnboardingProps) => {
+const Onboarding = ({ onComplete }: OnboardingProps) => {
   const [stepIndex, setStepIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(true);
 
   const preloadImages = () => {
     onboardingSteps.forEach((step) => {
-      const img = new Image();
+      const img = document.createElement("img");
       img.src = step.imageUrl;
     });
   };
@@ -58,6 +57,7 @@ const Onboarding = ({onComplete}:OnboardingProps) => {
       setStepIndex(stepIndex + 1);
     } else {
       setIsVisible(false); // Close the tour on the last step
+      onComplete();
     }
   };
 
@@ -69,6 +69,7 @@ const Onboarding = ({onComplete}:OnboardingProps) => {
 
   const skipTour = () => {
     setIsVisible(false);
+    onComplete();
   };
 
   const progressPercentage = ((stepIndex + 1) / onboardingSteps.length) * 100;
@@ -81,15 +82,12 @@ const Onboarding = ({onComplete}:OnboardingProps) => {
         className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md flex flex-col justify-between
                    sm:h-[60%] lg:h-[70%] animate-slide-in transition-opacity duration-500"
       >
-        <img
+        <Image
           src={onboardingSteps[stepIndex].imageUrl}
           alt={onboardingSteps[stepIndex].title}
-          onError={(e) =>
-            (e.currentTarget.src = "https://via.placeholder.com/400")
-          }
+          width={400}
+          height={180}
           className="w-full h-[180px] object-cover rounded-t-lg mb-4 transition-opacity duration-500 ease-in-out"
-          style={{ opacity: isVisible ? 1 : 0 }}
-
         />
 
         <div className="flex-grow text-center">

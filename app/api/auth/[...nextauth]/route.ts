@@ -1,11 +1,11 @@
-import NextAuth, { AuthOptions, SessionStrategy } from "next-auth";
+import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { compare } from "bcrypt";
 import { sql } from "@vercel/postgres";
 
-export const authOptions: AuthOptions = {
+export const authOptions = {
   session: {
-    strategy: "jwt" as SessionStrategy, // Explicitly cast the strategy type
+    strategy: "jwt",
   },
   pages: {
     signIn: "/auth/signin",
@@ -25,7 +25,6 @@ export const authOptions: AuthOptions = {
           `;
           const user = response.rows[0];
 
-          // Validate user credentials
           if (user && (await compare(credentials?.password || "", user.password))) {
             return {
               id: user.id,
@@ -44,7 +43,8 @@ export const authOptions: AuthOptions = {
   ],
 };
 
-// Use NextAuth as the handler for the route
+// Create the NextAuth handler
 const handler = NextAuth(authOptions);
 
+// Export the handler for GET and POST methods
 export { handler as GET, handler as POST };
