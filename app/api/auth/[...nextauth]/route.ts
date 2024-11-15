@@ -1,10 +1,10 @@
-import NextAuth, { AuthOptions } from "next-auth";
+import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { compare } from "bcrypt";
 import { sql } from "@vercel/postgres";
 
 // Define the authentication options
-export const authOptions: AuthOptions = {
+export const authOptions = {
   session: {
     strategy: "jwt",
   },
@@ -20,11 +20,11 @@ export const authOptions: AuthOptions = {
       },
       async authorize(credentials) {
         try {
-          // Fetch user from database
+          // Fetch user from the database
           const response = await sql`
             SELECT * FROM users WHERE username=${credentials?.username}
           `;
-          
+
           const user = response.rows[0];
 
           // If user exists and password is correct
@@ -39,29 +39,14 @@ export const authOptions: AuthOptions = {
           console.error("Authorization error:", error);
           throw new Error("Authentication failed");
         }
-        
+
         return null; // Return null if no user or password doesn't match
       },
     }),
   ],
 };
 
-// Named export for GET method (Request handler)
-export async function GET(req: Request, res: Response) {
-  try {
-    return NextAuth(req, res, authOptions);
-  } catch (error) {
-    console.error("GET request error:", error);
-    res.status(500).json({ error: "Server error during authentication" });
-  }
-}
+// Correctly export the NextAuth handler for the App Router
+const handler = NextAuth(authOptions);
 
-// Named export for POST method (Request handler)
-export async function POST(req: Request, res: Response) {
-  try {
-    return NextAuth(req, res, authOptions);
-  } catch (error) {
-    console.error("POST request error:", error);
-    res.status(500).json({ error: "Server error during authentication" });
-  }
-}
+export { handler as GET, handler as POST };

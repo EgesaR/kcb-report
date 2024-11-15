@@ -5,8 +5,7 @@ import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
 import SkeletonLayout from "@/components/skeletonLayout";
 import Onboarding from "@/components/Onboarding";
-import { FaFileAlt, FaTasks, FaChartBar } from "react-icons/fa";
-import { BsPersonCircle } from "react-icons/bs";
+import HomeTab from "@/components/tabs/Home";
 
 interface UserData {
   email: string;
@@ -75,7 +74,7 @@ export default function Home() {
       
 
       <div className="w-3/4 p-6">
-        {activeTab === 1 && <TabContent1 />}
+        {activeTab === 1 && <HomeTab data={userData}/>}
         {activeTab === 2 && <TabContent2 />}
         {activeTab === 3 && <TabContent3 />}
       </div>
@@ -83,11 +82,8 @@ export default function Home() {
   );
 }
 
-const TabContent1 = () => (
-  <div className="p-4">
-    <h2 className="text-xl font-semibold">Tab 1 Content</h2>
-    <p>This is the content for Tab 1.</p>
-  </div>
+const TabContent1 = (data: UserData | any) => (
+  <HomeTab data={data}/>
 );
 
 const TabContent2 = () => (

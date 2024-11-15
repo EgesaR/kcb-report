@@ -30,7 +30,7 @@ const Sidebar = ({ handleTabChange, data, activeTab }: SidebarProps) => {
   return (
     <div
       className={`h-full ease-in-out duration-300 ${
-        minimize ? "w-[5%]" : "w-[24%]"
+        minimize ? "w-[5%]" : "w-[20%]"
       } relative border-r-1 border-slate-400 pr-3 overflow-hidden`}
     >
       <div
