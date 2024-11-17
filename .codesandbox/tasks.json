@@ -2,8 +2,20 @@
   // These tasks will run in order when initializing your CodeSandbox project.
   "setupTasks": [
     {
-      "command": "bun install",
+      "command": "curl -fsSL https://bun.sh/install | bash",
       "name": "Install Dependencies"
+    },
+    {
+      "command": "exec /bin/zsh ",
+      "name": "exec /bin/zsh    bun --help "
+    },
+    {
+      "command": "bun --help ",
+      "name": "bun --help "
+    },
+    {
+      "command": "bun install",
+      "name": "b"
     }
   ],
 

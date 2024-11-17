@@ -44,15 +44,15 @@ const Form = () => {
           type="text"
           variant={"underlined"}
           color={"default"}
-          label={<label className="text-white">Username</label>}
-          className="w-full text-white placeholder-white"
+          label={<label className="text-black">Username</label>}
+          className="w-full text-black placeholder-black"
           name="username"
           labelPlacement={"outside"}
           isRequired
         />
         <Input
           color={"default"}
-          label={<label className="text-white">Password</label>}
+          label={<label className="text-black">Password</label>}
           variant="underlined"
           className="w-full"
           name="password"
@@ -75,7 +75,7 @@ const Form = () => {
           type={isVisible ? "text" : "password"}
         />
         <div className="flex">
-          <Link href="#" underline="always" className="ml-auto text-white">
+          <Link href="#" underline="always" className="ml-auto text-black">
             Forgot Password
           </Link>
         </div>
