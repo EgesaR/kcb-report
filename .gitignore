@@ -37,3 +37,5 @@ next-env.d.ts
 node_modules
 /.pnpm-store
 .pnpm-store/v3/files/00/0cc93cb350c2a13d84f3020358aa8f2b8485a83da11df3a747ab62a42f8d4b86d5c0c4ad11ca6e2ab27063d060af693e9c6d9219a6d5b81bcba278893236bd
+
+/.devcontainer

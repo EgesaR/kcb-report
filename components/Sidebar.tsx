@@ -38,7 +38,7 @@ const Sidebar = ({ handleTabChange, data, activeTab }: SidebarProps) => {
           minimize ? "flex-col" : "flex-row justify-center"
         }`}
       >
-        <h1 className="font-bold text-[10px] sm:text-lg">
+        <h1 className="font-bold text-[5px] sm:text-lg">
           {minimize ? "KCB" : "Kiira College Butiki"}
         </h1>
         <button onClick={handleMinimize}>

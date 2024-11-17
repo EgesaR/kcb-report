@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
@@ -6,6 +6,7 @@ import Sidebar from "@/components/Sidebar";
 import SkeletonLayout from "@/components/skeletonLayout";
 import Onboarding from "@/components/Onboarding";
 import HomeTab from "@/components/tabs/Home";
+import ReportTab from "@/components/tabs/Report";
 
 interface UserData {
   email: string;
@@ -70,21 +71,20 @@ export default function Home() {
   return (
     <div className="h-screen w-full bg-white px-3 pt-1 flex">
       {showOnboarding && <Onboarding onComplete={handleOnboardingComplete} />}
-      <Sidebar data={userData} handleTabChange={handleTabChange} activeTab={activeTab} />
-      
+      <Sidebar
+        data={userData}
+        handleTabChange={handleTabChange}
+        activeTab={activeTab}
+      />
 
-      <div className="w-3/4 p-6">
-        {activeTab === 1 && <HomeTab data={userData}/>}
-        {activeTab === 2 && <TabContent2 />}
+      <div className="w-full p-6">
+        {activeTab === 1 && <HomeTab data={userData} />}
+        {activeTab === 2 && <ReportTab subject="Physics" />}
         {activeTab === 3 && <TabContent3 />}
       </div>
     </div>
   );
 }
-
-const TabContent1 = (data: UserData | any) => (
-  <HomeTab data={data}/>
-);
 
 const TabContent2 = () => (
   <div className="p-4">

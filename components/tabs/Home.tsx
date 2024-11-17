@@ -10,19 +10,13 @@ interface UserData {
 const HomeTab = (data: UserData | any) => {
     const { username } = data.data;
     return (
-      <div className="w-full p-6 overflow-hidden bg-gray-100">
+      <div className="w-full p-6 overflow-y-auto block h-screen bg-gray-100">
         {/* Welcome and User Info */}
         <div className="mb-6">
           <div className="flex items-center justify-between">
             <h1 className="text-2xl font-semibold text-gray-800">
               Welcome Back, {username}!
             </h1>
-            <div className="flex items-center space-x-4">
-              <div className="text-gray-600">
-                <BsPersonCircle className="w-8 h-8 text-gray-800" />
-              </div>
-              <button className="text-blue-500">Logout</button>
-            </div>
           </div>
           <p className="text-gray-500 text-sm mt-2">
             Here&apos;s a quick overview of your recent activities.
