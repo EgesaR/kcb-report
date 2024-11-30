@@ -3,7 +3,8 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { compare } from "bcrypt";
 import { sql } from "@vercel/postgres";
 
-export const authOptions = {
+// NextAuth configuration
+const authOptions = {
   session: {
     strategy: "jwt",
   },
@@ -19,7 +20,7 @@ export const authOptions = {
       },
       async authorize(credentials) {
         try {
-          // Fetch user from database
+          // Fetch user from the database
           const response = await sql`
             SELECT * FROM users WHERE username=${credentials?.username}
           `;
@@ -43,8 +44,6 @@ export const authOptions = {
   ],
 };
 
-// Create the NextAuth handler
+// Default export for the Next.js API route
 const handler = NextAuth(authOptions);
-
-// Export the handler for GET and POST methods
-export { handler as GET, handler as POST };
+export default handler;
