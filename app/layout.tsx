@@ -2,9 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { NextUIProvider } from "@nextui-org/react";
-import { getServerSession } from "next-auth";
-import Link from "next/link";
-import Logout from "./logout";
+import AuthProvider from "@/components/Providers";
+import Appbar from "@/components/Appbar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,31 +16,18 @@ export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
-  }) {
-  const session = await getServerSession()
+}) {
   return (
     <html lang="en">
       <body
         className={`${inter.className} bg-gradient-to-r from-[#d3d3d3] to-[#d3d3d3]`}
       >
-        
-        <NextUIProvider>
-          <div className="flex">
-            <div className="ml-auto mr-2">
-              {!!session && (
-                <div className="flex gap-4">
-                  <Link href="/dashboard">Dashboards</Link>
-                  <Logout />
-                </div>
-              )}
-              {!session && <>
-                <Link href="/auth/signin">Login</Link>
-                <Link href="/auth/signup">SignUp</Link>
-              </>}
-            </div>
-          </div>
-          {children}
-        </NextUIProvider>
+        <AuthProvider>
+          <NextUIProvider>
+            <Appbar />
+            {children}
+          </NextUIProvider>
+        </AuthProvider>
       </body>
     </html>
   );
