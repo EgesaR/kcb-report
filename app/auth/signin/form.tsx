@@ -32,6 +32,7 @@ const Form = () => {
       console.log("Truly you got an errors");
     }
     if (!response?.error) {
+      console.log("response",response)
       router.push("/dashboard");
       router.refresh();
     }

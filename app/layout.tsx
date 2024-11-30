@@ -34,7 +34,10 @@ export default async function RootLayout({
                   <Logout />
                 </div>
               )}
-              {!session && <Link href="/auth/signin">Login</Link>}
+              {!session && <>
+                <Link href="/auth/signin">Login</Link>
+                <Link href="/auth/signup">SignUp</Link>
+              </>}
             </div>
           </div>
           {children}

@@ -20,7 +20,7 @@ const SignInPage = async () => {
           <Link
             href="/auth/signup"
             underline="always"
-            className="ml-auto text-white mt-6"
+            className="ml-auto text-black mt-6"
           >
             Create Account
           </Link>
