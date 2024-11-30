@@ -1,6 +1,6 @@
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route"; // Import auth options from your NextAuth handler
+import { authOptions } from "@/app/api/auth/[...nextauth]"; // Import auth options from your NextAuth handler
 import { sql } from "@vercel/postgres";
 
 export async function GET(req: NextRequest) {
