@@ -1,12 +1,12 @@
-import NextAuth from "next-auth";
+import NextAuth, { AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { compare } from "bcrypt";
 import { sql } from "@vercel/postgres";
 
-// NextAuth configuration
-const authOptions = {
+// Ensure authOptions matches the AuthOptions type
+export const authOptions: AuthOptions = {
   session: {
-    strategy: "jwt",
+    strategy: "jwt", // 'jwt' is a valid value for SessionStrategy
   },
   pages: {
     signIn: "/auth/signin",
@@ -44,6 +44,5 @@ const authOptions = {
   ],
 };
 
-// Default export for the Next.js API route
 const handler = NextAuth(authOptions);
 export default handler;
