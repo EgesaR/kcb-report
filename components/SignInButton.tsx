@@ -19,10 +19,6 @@ const SignInButton = () => {
   }
   return (
     <div className="flex ml-auto">
-      <button onClick={() => signIn()} className="text-green-800 mr-4">
-        Sign In
-      </button> 
-      <label onClick={() => signIn()}></label>
       <Link href="/auth/signup">SignUp</Link>
     </div>
   );
