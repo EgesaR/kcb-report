@@ -4,7 +4,11 @@ export default async function Home() {
       <div className="h-screen w-full flex">
         <div className="w-1/2 h-full grid place-items-center">
           <p className="text-2xl font-bold">
-            Make
+            Make  
+            <label className="text-blue-400">
+              outstanding
+            </label>
+            reports.
           </p>
         </div>
       </div>
