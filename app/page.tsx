@@ -40,7 +40,7 @@ const Home = () => {
             KCB Reports Beta Is Coming Soon!
           </span>
 
-          <div className="max-w-5xl flex text-center text-3xl sm:text-5xl sm:leading-tight md:text-7xl">
+          <div className="max-w-5xl flex text-center text-2xl sm:text-5xl sm:leading-tight md:text-7xl">
             <h1 className="bg-gradient-to-br from-white to-gray-400 bg-clip-text font-medium leading-tight text-transparent md:leading-tight">
               Make
             </h1>
@@ -79,29 +79,13 @@ const Home = () => {
           </motion.button>
         </div>
       </motion.section>
-      <div className="h-[90vh] w-full flex">
-        <div className="w-1/2 h-full"></div>
-        <div className="w-1/2 h-full flex items-center">
-          <div className="text-[28px]">
-            Involve school stakeholders with student's progress to archive the
-            best of it.
-          </div>
-        </div>
-      </div>
-
-      <div className="h-[90vh] w-full flex">
-        <div className="w-1/2 h-full flex items-center">
-          <div className="text-[28px]">
-            <label className="text-green-600">Receive</label>,&nbsp;
-            <label className="text-purple-500">Predict</label>,&nbsp;
-            <label className="text-blue-600">Evaluate</label>&nbsp; and
-            take&nbsp;
-            <label className="text-orange-500">Action</label>&nbsp; of the
-            subject and class performance.
-          </div>
-        </div>
-        <div className="w-1/2 h-full"></div>
-      </div>
+      <motion.section className="h-[90vh] w-full">
+            <h1 className="w-full text-3xl font-semibold text-slate-600">
+              Create the most 
+              <label className="text-green-600">outstanding</label> 
+              processed reports basing on school's preferences.
+            </h1>
+      </motion.section>
     </div>
   );
 };
