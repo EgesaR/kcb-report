@@ -8,6 +8,7 @@ import {
   motion,
   animate,
 } from "framer-motion";
+import CardLayout from "@/components/CardLayout";
 
 const COLORS_TOP = ["#13FFAA", "#1E67C6", "#CE84CF", "#DD335C"];
 
@@ -28,12 +29,12 @@ const Home = () => {
   const boxShadow = useMotionTemplate`0px 4px 24px ${color}`;
 
   return (
-    <div className="w-full bg-white/80 px-3 pt-1 flex flex-col dark:bg-[#111113] dark:text-white">
+    <div className="w-full bg-white/80 pt-1 flex flex-col dark:bg-[#111113] dark:text-white">
       <motion.section
         style={{
           backgroundImage,
         }}
-        className="relative grid min-h-screen place-content-center overflow-hidden bg-gray-950 px-4 py-24 text-gray-200"
+        className="relative grid min-h-screen place-content-center overflow-hidden bg-gray-950 px-4 py-12 sm:py-24 text-gray-200"
       >
         <div className="relative z-10 flex flex-col items-center">
           <span className="mb-2.5 inline-block rounded-full bg-gray-600/50 px-3 py-1.5 text-sm">
@@ -56,8 +57,7 @@ const Home = () => {
           </div>
 
           <p className="my-6 max-w-xl text-center text-base leading-relaxed md:text-lg md:leading-relaxed">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae, et,
-            distinctio eum impedit nihil ipsum modi.
+            Create, Optimize, Respond, Engage.
           </p>
 
           <motion.button
@@ -79,12 +79,43 @@ const Home = () => {
           </motion.button>
         </div>
       </motion.section>
-      <motion.section className="h-[90vh] w-full">
-            <h1 className="w-full text-3xl font-semibold text-slate-600">
-              Create the most 
-              <label className="text-green-600">outstanding</label> 
-              processed reports basing on school's preferences.
-            </h1>
+      <motion.section className="min-h-screen w-full pt-24">
+        <h1 className="w-full text-3xl md:text-5xl font-semibold text-[#202124] dark:text-slate-300 text-center px-4">
+          <label>Create the most </label>
+          <label className="text-green-600 bg-[#ceead6] rounded-xl px-2 py-1 mb-2">
+            outstanding
+          </label>
+          <br />
+          <label>processed reports basing on school's preferences</label>
+        </h1>
+        <div className="gap-4 sm:gap-2 grid grid-cols-1 sm:grid-cols-4 mt-14 px-2">
+          <CardLayout>
+            <h4 className="font-bold text-large">
+              Personalized Report Designs
+            </h4>
+            <small className="text-default-500">
+              <label>
+                KCB Reports offers a variety of customizable and collaborative
+                report designs tailored to highlight the core mission and
+                objectives of educational institutions.
+              </label>
+              <br />
+              <label>
+                These designs are crafted to ensure clarity and focus,
+                effectively communicating the essential purpose of the school.
+              </label>
+            </small>
+          </CardLayout>
+          <CardLayout>
+            <h4 className="font-bold text-large">Frontend Radio</h4>
+          </CardLayout>
+          <CardLayout>
+            <h4 className="font-bold text-large">Frontend Radio</h4>
+          </CardLayout>
+          <CardLayout>
+            <h4 className="font-bold text-large">Frontend Radio</h4>
+          </CardLayout>
+        </div>
       </motion.section>
     </div>
   );
