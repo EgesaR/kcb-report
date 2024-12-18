@@ -29,7 +29,7 @@ const Home = () => {
   const boxShadow = useMotionTemplate`0px 4px 24px ${color}`;
 
   return (
-    <div className="w-full bg-white/80 pt-1 flex flex-col dark:bg-[#111113] dark:text-white">
+    <div className="w-full bg-white/80 pt-1 pb-8 flex flex-col dark:bg-[#111113] dark:text-white">
       <motion.section
         style={{
           backgroundImage,
@@ -41,23 +41,20 @@ const Home = () => {
             KCB Reports Beta Is Coming Soon!
           </span>
 
-          <div className="max-w-5xl flex text-center text-2xl sm:text-5xl sm:leading-tight md:text-7xl">
+          <div className="max-w-5xl flex text-center text-[26px] sm:text-5xl sm:leading-tight md:text-5xl">
             <h1 className="bg-gradient-to-br from-white to-gray-400 bg-clip-text font-medium leading-tight text-transparent md:leading-tight">
               Make
             </h1>
-            <div className="mx-2 flex flex-col gap-2 mt-1 font-semibold overflow-hidden">
-              <div className="text-green-600">outstanding</div>
-              <div className="text-rose-600">dynamic</div>
-              <div className="text-sky-700">powerful</div>
-              <div className="text-amber-500">friendly</div>
-            </div>
+            <h1 className="mx-1 sm:mx-2 leading-tight md:leading-tight font-semibold from-teal-400 to-green-500 bg-clip-text text-transparent bg-gradient-to-b">
+              outstanding
+            </h1>
             <h1 className="bg-gradient-to-br from-white to-gray-400 bg-clip-text font-medium leading-tight text-transparent md:leading-tight">
-              reports.
+              reports
             </h1>
           </div>
 
-          <p className="my-6 max-w-xl text-center text-base leading-relaxed md:text-lg md:leading-relaxed">
-            Create, Optimize, Respond, Engage.
+          <p className="mb-6 mt-4 sm:mb-6 sm:mt-4 max-w-xl text-center text-base leading-relaxed md:text-xl md:leading-relaxed">
+            that are creatative, optimum, responsive and engaging.
           </p>
 
           <motion.button
@@ -72,7 +69,7 @@ const Home = () => {
             whileTap={{
               scale: 0.985,
             }}
-            className="group relative flex w-fit items-center gap-1.5 rounded-full bg-gray-950/10 px-4 py-2 text-gray-50 transition-colors hover:bg-gray-950/50"
+            className="-ml-4 sm:-ml-8 group relative flex w-fit items-center gap-1.5 rounded-full bg-gray-950/10 px-4 py-2 text-gray-50 transition-colors hover:bg-gray-950/50"
           >
             Start free trial
             <FiArrowRight className="transition-transform group-hover:-rotate-45 group-active:-rotate-12" />
@@ -88,23 +85,26 @@ const Home = () => {
           <br />
           <label>processed reports basing on school's preferences</label>
         </h1>
-        <div className="gap-4 sm:gap-2 grid grid-cols-1 sm:grid-cols-4 mt-14 px-2">
+        <div className="gap-4 sm:gap-2 grid grid-cols-1 sm:grid-cols-4 mt-14 px-4 sm:px-3">
           <CardLayout>
             <h4 className="font-bold text-large">
               Personalized Report Designs
             </h4>
-            <small className="text-default-500">
+            <small className="text-slate-500 text-sm sm:text-[15px]">
               <label>
                 KCB Reports offers a variety of customizable and collaborative
                 report designs tailored to highlight the core mission and
                 objectives of educational institutions.
               </label>
               <br />
-              <label>
+              <label className="hidden">
                 These designs are crafted to ensure clarity and focus,
                 effectively communicating the essential purpose of the school.
               </label>
             </small>
+            <div>
+              <button></button>
+            </div>
           </CardLayout>
           <CardLayout>
             <h4 className="font-bold text-large">Frontend Radio</h4>

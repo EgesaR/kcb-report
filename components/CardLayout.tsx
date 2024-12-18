@@ -1,4 +1,11 @@
-import {Card, CardHeader, CardBody, Image} from "@nextui-org/react";
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  Image,
+  CardFooter,
+  Button,
+} from "@nextui-org/react";
 import { ReactNode } from "react";
 
 interface CardLayoutProps {
@@ -7,11 +14,11 @@ interface CardLayoutProps {
   children: ReactNode;
 }
 
-const CardLayout = ({children, alt, src}:CardLayoutProps) => {
+const CardLayout = ({ children, alt, src }: CardLayoutProps) => {
   return (
-    <Card className="pb-4">
+    <Card className="pb-4 h-[420px] sm:h-[440px]">
       <CardHeader className="overflow-visible py-2">
-      <Image
+        <Image
           removeWrapper
           alt="Card background"
           className="object-cover rounded-xl w-full"
@@ -19,11 +26,14 @@ const CardLayout = ({children, alt, src}:CardLayoutProps) => {
           width={270}
         />
       </CardHeader>
-      <CardBody className="pb-0 pt-2 px-4 flex-col items-start">
+      <CardBody className="pb-0 pt-2 px-4 flex-col items-start relative overflow-x-hidden">
         {children}
       </CardBody>
+      <CardFooter className="absolute bottom-0 w-full flex justify-end">
+        <Button>Read more</Button>
+      </CardFooter> 
     </Card>
   );
-}
+};
 
-export default CardLayout
+export default CardLayout;
